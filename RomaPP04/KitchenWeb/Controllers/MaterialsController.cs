@@ -59,6 +59,41 @@ namespace KitchenWeb.Controllers
             }
         }
 
+        [HttpPost("/GetMaterialById")]
+        public async Task<IActionResult> GetMaterialById([FromBody] int id)
+        {
+            Stream buffer = new MemoryStream();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string sqlExpression = "ReadMaterialsById";
+                SqlCommand command = new SqlCommand(sqlExpression, connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                SqlParameter idParam = new SqlParameter
+                {
+                    ParameterName = "@id",
+                    Value = id
+                };
+                command.Parameters.Add(idParam);
+
+                var reader = command.ExecuteReader();
+
+
+                var results = new List<Dictionary<string, object>>();
+                var cols = new List<string>();
+                for (var i = 0; i < reader.FieldCount; i++)
+                    cols.Add(reader.GetName(i));
+                while (reader.Read())
+                    results.Add(SerializeRow(cols, reader));
+                Console.WriteLine("1111111");
+                return Ok(results);
+
+
+            }
+        }
+
+
+
         // GET: Materials/Details/5
         public async Task<IActionResult> Details(int? id)
         {
