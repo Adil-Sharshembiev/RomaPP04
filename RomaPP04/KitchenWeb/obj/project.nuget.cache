@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "O/to9FDMWqlYpcSOUqWohIeuDmrZRoPMM8eiKylaiK02kZlHurOv7iPQzsewQVFEWu8QQONwCPSw98zkFWvMZw==",
+  "dgSpecHash": "Csi79doC8f/xpgKjq0IKV0UcEnbCWuk8J6swIVjAk89rD1A0TIvys97ObbYbxMHT2EZPl3py2c9BDYwZDcSKYA==",
   "success": true,
-  "projectFilePath": "D:\\Локальный диск\\Адил\\УЧЁБА\\Универ\\3 курс\\БД\\KitchenWeb\\KitchenWeb\\KitchenWeb.csproj",
+  "projectFilePath": "C:\\Users\\adil\\Desktop\\ppo3\\RomaPP04\\KitchenWeb\\KitchenWeb.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\adil\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\adil\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Локальный диск\\Адил\\УЧЁБА\\Универ\\3 курс\\БД\\KitchenWeb\\KitchenWeb\\KitchenWeb.csproj": {}
+    "C:\\Users\\adil\\Desktop\\ppo3\\RomaPP04\\KitchenWeb\\KitchenWeb.csproj": {}
   },
   "projects": {
-    "D:\\Локальный диск\\Адил\\УЧЁБА\\Универ\\3 курс\\БД\\KitchenWeb\\KitchenWeb\\KitchenWeb.csproj": {
+    "C:\\Users\\adil\\Desktop\\ppo3\\RomaPP04\\KitchenWeb\\KitchenWeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Локальный диск\\Адил\\УЧЁБА\\Универ\\3 курс\\БД\\KitchenWeb\\KitchenWeb\\KitchenWeb.csproj",
+        "projectUniqueName": "C:\\Users\\adil\\Desktop\\ppo3\\RomaPP04\\KitchenWeb\\KitchenWeb.csproj",
         "projectName": "KitchenWeb",
-        "projectPath": "D:\\Локальный диск\\Адил\\УЧЁБА\\Универ\\3 курс\\БД\\KitchenWeb\\KitchenWeb\\KitchenWeb.csproj",
+        "projectPath": "C:\\Users\\adil\\Desktop\\ppo3\\RomaPP04\\KitchenWeb\\KitchenWeb.csproj",
         "packagesPath": "C:\\Users\\adil\\.nuget\\packages\\",
-        "outputPath": "D:\\Локальный диск\\Адил\\УЧЁБА\\Универ\\3 курс\\БД\\KitchenWeb\\KitchenWeb\\obj\\",
+        "outputPath": "C:\\Users\\adil\\Desktop\\ppo3\\RomaPP04\\KitchenWeb\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\adil\\AppData\\Roaming\\NuGet\\NuGet.Config",
