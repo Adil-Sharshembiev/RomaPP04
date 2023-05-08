@@ -49,10 +49,8 @@ namespace KitchenWeb.Controllers
                 var cols = new List<string>();
                 for (var i = 0; i < reader.FieldCount; i++)
                     cols.Add(reader.GetName(i));
-
                 while (reader.Read())
                     results.Add(SerializeRow(cols, reader));
-                Console.WriteLine("1111111");
                 return Ok(results);
                 
 
@@ -85,14 +83,97 @@ namespace KitchenWeb.Controllers
                     cols.Add(reader.GetName(i));
                 while (reader.Read())
                     results.Add(SerializeRow(cols, reader));
-                Console.WriteLine("1111111");
                 return Ok(results);
-
-
             }
         }
+        [HttpPost("/CreateMaterials")]
+        public async Task<IActionResult> CreateMaterials( string name, int unit, double count, double price)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sqlExpression = "CreateMaterials";
+                    SqlCommand command = new SqlCommand(sqlExpression, connection);
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    SqlParameter nameParam = new SqlParameter
+                    {
+                        ParameterName = "@name",
+                        Value = name
+                    };
+                    command.Parameters.Add(nameParam);
+                    SqlParameter unitParam = new SqlParameter
+                    {
+                        ParameterName = "@unit",
+                        Value = unit
+                    };
+                    command.Parameters.Add(unitParam);
+                    SqlParameter countParam = new SqlParameter
+                    {
+                        ParameterName = "@count",
+                        Value = count
+                    };
+                    command.Parameters.Add(countParam);
+                    SqlParameter priceParam = new SqlParameter
+                    {
+                        ParameterName = "@price",
+                        Value = price
+                    };
+                    command.Parameters.Add(priceParam);
+                    var reader = command.ExecuteScalar();
+                    return new JsonResult(new
+                    {
+                        status = 1,
+                        message = "Успешное добавление"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                return new JsonResult(new
+                {
+                    status = 2,
+                    message = "Не удалось добавить"
+                });
+            }
+        }
+        [HttpPost("/DeleteMaterialById")]
+        public async Task<IActionResult> DeleteMaterialById([FromBody] int id)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sqlExpression = "DelMaterials";
+                    SqlCommand command = new SqlCommand(sqlExpression, connection);
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    SqlParameter idParam = new SqlParameter
+                    {
+                        ParameterName = "@id",
+                        Value = id
+                    };
+                    command.Parameters.Add(idParam);
 
-
+                    var reader = command.ExecuteReader();
+                    return new JsonResult(new
+                    {
+                        status = 1,
+                        message = "Успешное удаление"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                return new JsonResult(new
+                {
+                    status = 2,
+                    message = "Не удалось удалить"
+                });
+            }
+            
+        }
 
         // GET: Materials/Details/5
         public async Task<IActionResult> Details(int? id)
