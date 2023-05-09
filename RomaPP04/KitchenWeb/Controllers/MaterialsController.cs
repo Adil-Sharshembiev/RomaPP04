@@ -35,7 +35,6 @@ namespace KitchenWeb.Controllers
         [HttpGet ("/GetMaterialsList")]
         public async Task<IActionResult> GetMaterialsList()
         {
-            Stream buffer = new MemoryStream();
             using (SqlConnection connection = new SqlConnection(connectionString)) 
             {
                 connection.Open();
@@ -57,6 +56,44 @@ namespace KitchenWeb.Controllers
             }
         }
 
+        [HttpGet ("/GetUnitList")]
+        public async Task<IActionResult> GetUnitList()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString)) 
+                {
+                    connection.Open();
+                    string sqlExpression = "Unit";
+                    SqlCommand command = new SqlCommand(sqlExpression, connection);
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    var reader = command.ExecuteReader();
+                    var results = new List<Dictionary<string, object>>();
+                    var cols = new List<string>();
+                    for (var i = 0; i < reader.FieldCount; i++)
+                        cols.Add(reader.GetName(i));
+                    while (reader.Read())
+                        results.Add(SerializeRow(cols, reader));
+                    return new JsonResult(new
+                    {
+                        status = 1,
+                        message = "Успех",
+                        result = results
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                return new JsonResult(new
+                {
+                    status = 2,
+                    message = "Ошибка"
+                });
+            }
+            
+        }
+        
+        
         [HttpPost("/GetMaterialById")]
         public async Task<IActionResult> GetMaterialById([FromBody] int id)
         {
@@ -174,7 +211,64 @@ namespace KitchenWeb.Controllers
             }
             
         }
-
+        [HttpPost("/UpdateMaterials")]
+        public async Task<IActionResult> UpdateMaterials(int id,string name, int unit, double count, double price)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sqlExpression = "UpdateMaterials";
+                    SqlCommand command = new SqlCommand(sqlExpression, connection);
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    SqlParameter idParam = new SqlParameter
+                    {
+                        ParameterName = "@id",
+                        Value = id
+                    };
+                    command.Parameters.Add(idParam);
+                    SqlParameter nameParam = new SqlParameter
+                    {
+                        ParameterName = "@name",
+                        Value = name
+                    };
+                    command.Parameters.Add(nameParam);
+                    SqlParameter unitParam = new SqlParameter
+                    {
+                        ParameterName = "@unit",
+                        Value = unit
+                    };
+                    command.Parameters.Add(unitParam);
+                    SqlParameter countParam = new SqlParameter
+                    {
+                        ParameterName = "@count",
+                        Value = count
+                    };
+                    command.Parameters.Add(countParam);
+                    SqlParameter priceParam = new SqlParameter
+                    {
+                        ParameterName = "@price",
+                        Value = price
+                    };
+                    command.Parameters.Add(priceParam);
+                    var reader = command.ExecuteScalar();
+                    return new JsonResult(new
+                    {
+                        status = 1,
+                        message = "Успешное изменение"
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                return new JsonResult(new
+                {
+                    status = 2,
+                    message = "Не удалось изменить"
+                });
+            }
+        }
         // GET: Materials/Details/5
         public async Task<IActionResult> Details(int? id)
         {
