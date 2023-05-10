@@ -124,7 +124,7 @@ namespace KitchenWeb.Controllers
             }
         }
         [HttpPost("/CreateMaterials")]
-        public async Task<IActionResult> CreateMaterials( string name, int unit, double count, double price)
+        public async Task<IActionResult> CreateMaterials([FromForm] string name, int unit, double count, double price)
         {
             try
             {
@@ -176,7 +176,7 @@ namespace KitchenWeb.Controllers
             }
         }
         [HttpPost("/DeleteMaterialById")]
-        public async Task<IActionResult> DeleteMaterialById([FromBody] int id)
+        public async Task<IActionResult> DeleteMaterialById([FromForm] int id)
         {
             try
             {
@@ -212,7 +212,7 @@ namespace KitchenWeb.Controllers
             
         }
         [HttpPost("/UpdateMaterials")]
-        public async Task<IActionResult> UpdateMaterials(int id,string name, int unit, double count, double price)
+        public async Task<IActionResult> UpdateMaterials([FromForm] int id,string name, int unit, double count, double price)
         {
             try
             {

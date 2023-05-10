@@ -7,7 +7,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<KitchenDbContext>();
 var app = builder.Build();
-
+builder.Services.AddCors();
+app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod());
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
