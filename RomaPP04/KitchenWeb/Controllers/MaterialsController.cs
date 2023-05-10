@@ -124,12 +124,19 @@ namespace KitchenWeb.Controllers
             }
         }
         [HttpPost("/CreateMaterials")]
-        public async Task<IActionResult> CreateMaterials([FromForm] string name, int unit, double count, double price)
+        public async Task<IActionResult> CreateMaterials([FromForm] string name, int unit, string count, string price)
         {
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
+
+                    count = count.Replace(".",",");
+                    price = count.Replace(".",",");
+
+                    double c = Convert.ToDouble(count);
+                    double p = Convert.ToDouble(price);
+
                     connection.Open();
                     string sqlExpression = "CreateMaterials";
                     SqlCommand command = new SqlCommand(sqlExpression, connection);
@@ -149,13 +156,13 @@ namespace KitchenWeb.Controllers
                     SqlParameter countParam = new SqlParameter
                     {
                         ParameterName = "@count",
-                        Value = count
+                        Value = c
                     };
                     command.Parameters.Add(countParam);
                     SqlParameter priceParam = new SqlParameter
                     {
                         ParameterName = "@price",
-                        Value = price
+                        Value = p
                     };
                     command.Parameters.Add(priceParam);
                     var reader = command.ExecuteScalar();
@@ -212,12 +219,18 @@ namespace KitchenWeb.Controllers
             
         }
         [HttpPost("/UpdateMaterials")]
-        public async Task<IActionResult> UpdateMaterials([FromForm] int id,string name, int unit, double count, double price)
+        public async Task<IActionResult> UpdateMaterials([FromForm] int id,string name, int unit, string count, string price)
         {
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
+                    count = count.Replace(".",",");
+                    price = count.Replace(".",",");
+
+                    double c = Convert.ToDouble(count);
+                    double p = Convert.ToDouble(price);
+                    
                     connection.Open();
                     string sqlExpression = "UpdateMaterials";
                     SqlCommand command = new SqlCommand(sqlExpression, connection);
@@ -243,13 +256,13 @@ namespace KitchenWeb.Controllers
                     SqlParameter countParam = new SqlParameter
                     {
                         ParameterName = "@count",
-                        Value = count
+                        Value = c
                     };
                     command.Parameters.Add(countParam);
                     SqlParameter priceParam = new SqlParameter
                     {
                         ParameterName = "@price",
-                        Value = price
+                        Value = p
                     };
                     command.Parameters.Add(priceParam);
                     var reader = command.ExecuteScalar();

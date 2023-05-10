@@ -12,7 +12,7 @@ public class IngredientsController : Controller
     public IngredientsController(KitchenDbContext context)
     {
         _context = context;
-        connectionString = @"Data Source=HOME-PC;Initial Catalog=FinishKitchen;Integrated Security=True;TrustServerCertificate=True;MultiSubnetFailover=True";
+        connectionString = @"Data Source=DESKTOP-3A56OLQ;Initial Catalog=AccountingWeb;Integrated Security=True;TrustServerCertificate=True;MultiSubnetFailover=True";
     }
     private Dictionary<string, object> SerializeRow(IEnumerable<string> cols,
         SqlDataReader reader)
@@ -23,7 +23,7 @@ public class IngredientsController : Controller
         return result;
     }
     [HttpPost("/GetMatIngredients")]
-    public async Task<IActionResult> GetMatIngr(int product)
+    public async Task<IActionResult> GetMatIngr([FromForm] int product)
     {
         try
         {
@@ -70,12 +70,15 @@ public class IngredientsController : Controller
     
     
     [HttpPost("/CreateIngredients")]
-    public async Task<IActionResult> CreateIngredients( int product, int material, double count)
+    public async Task<IActionResult> CreateIngredients([FromForm] int product, int material, string count)
     {
         try
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                count = count.Replace(".",",");
+                double c = Convert.ToDouble(count);
+
                 connection.Open();
                 string sqlExpression = "CreateIngredients";
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
@@ -95,7 +98,7 @@ public class IngredientsController : Controller
                 SqlParameter countParam = new SqlParameter
                 {
                     ParameterName = "@count",
-                    Value = count
+                    Value = c
                 };
                 command.Parameters.Add(countParam);
 
@@ -118,12 +121,15 @@ public class IngredientsController : Controller
         
     }
     [HttpPost("/UpdateIngredients")]
-    public async Task<IActionResult> UpdateIngredients( int id, int product, int material, double count)
+    public async Task<IActionResult> UpdateIngredients([FromForm] int id, int product, int material, string count)
     {
         try
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                count = count.Replace(".",",");
+                double c = Convert.ToDouble(count);
+                
                 connection.Open();
                 string sqlExpression = "UpdateIngredients";
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
@@ -149,7 +155,7 @@ public class IngredientsController : Controller
                 SqlParameter countParam = new SqlParameter
                 {
                     ParameterName = "@count",
-                    Value = count
+                    Value = c
                 };
                 command.Parameters.Add(countParam);
 
@@ -171,7 +177,7 @@ public class IngredientsController : Controller
         }
     }
     [HttpPost("/DeleteIngredients")]
-    public async Task<IActionResult> DeleteIngredients( int id)
+    public async Task<IActionResult> DeleteIngredients([FromForm] int id)
     {
         try
         {
