@@ -12,7 +12,7 @@ public class IngredientsController : Controller
     public IngredientsController(KitchenDbContext context)
     {
         _context = context;
-        connectionString = @"Data Source=DESKTOP-3A56OLQ;Initial Catalog=AccountingWeb;Integrated Security=True;TrustServerCertificate=True;MultiSubnetFailover=True";
+        connectionString = @"Data Source=HOME-PC;Initial Catalog=FinishKitchen;Integrated Security=True;TrustServerCertificate=True;MultiSubnetFailover=True";
     }
     private Dictionary<string, object> SerializeRow(IEnumerable<string> cols,
         SqlDataReader reader)

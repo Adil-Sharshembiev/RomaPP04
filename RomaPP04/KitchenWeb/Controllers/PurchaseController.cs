@@ -85,4 +85,42 @@ public class PurchaseController : Controller
         }
     }
     
+    [HttpPost("/UpdatePurchase")]
+    public async Task<IActionResult> UpdatePurchase([FromForm] int id, int material, double count, double price,
+        DateTime date,
+        int employee)
+    {
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            using (SqlCommand command = new SqlCommand("UpdatePurchase", connection))
+            {
+                try
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "UpdatePurchase";
+                    command.Parameters.AddWithValue("@id", id);
+                    command.Parameters.AddWithValue("@matId", material);
+                    command.Parameters.AddWithValue("@count", count);
+                    command.Parameters.AddWithValue("@price", price);
+                    command.Parameters.AddWithValue("@date", date);
+                    command.Parameters.AddWithValue("@employeeId", employee);
+                    command.ExecuteNonQuery();
+                    return new JsonResult(new
+                    {
+                        status = 1,
+                        message = "Изменено"
+                    });
+                }
+                catch (Exception e)
+                {
+                    return new JsonResult(new
+                    {
+                        status = 2,
+                        message = "Не удалось изменить"
+                    });
+                }
+            }
+        }
+    }
 }

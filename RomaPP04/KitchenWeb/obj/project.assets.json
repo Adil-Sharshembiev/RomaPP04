@@ -10676,24 +10676,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Rinat\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\adil\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Учеба\\3-курс\\6-семестр\\СУБД\\ProductionWeb\\RomaPP04\\RomaPP04\\KitchenWeb\\KitchenWeb.csproj",
+      "projectUniqueName": "C:\\Users\\adil\\Desktop\\ppo3\\RomaPP04\\KitchenWeb\\KitchenWeb.csproj",
       "projectName": "KitchenWeb",
-      "projectPath": "F:\\Учеба\\3-курс\\6-семестр\\СУБД\\ProductionWeb\\RomaPP04\\RomaPP04\\KitchenWeb\\KitchenWeb.csproj",
-      "packagesPath": "C:\\Users\\Rinat\\.nuget\\packages\\",
-      "outputPath": "F:\\Учеба\\3-курс\\6-семестр\\СУБД\\ProductionWeb\\RomaPP04\\RomaPP04\\KitchenWeb\\obj\\",
+      "projectPath": "C:\\Users\\adil\\Desktop\\ppo3\\RomaPP04\\KitchenWeb\\KitchenWeb.csproj",
+      "packagesPath": "C:\\Users\\adil\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\adil\\Desktop\\ppo3\\RomaPP04\\KitchenWeb\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Rinat\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\adil\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
