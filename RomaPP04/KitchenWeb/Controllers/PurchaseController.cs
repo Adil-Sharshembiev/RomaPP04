@@ -47,19 +47,23 @@ public class PurchaseController : Controller
         }
     }
     [HttpPost("/CreatePurchase")]
-    public async Task<IActionResult> CreatePurchase(int material, double count, double price, DateTime date,
+    public async Task<IActionResult> CreatePurchase([FromForm] int material, string count, string price, DateTime date,
         int employee)
     {
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
+            count = count.Replace(".",",");
+            double c = Convert.ToDouble(count);
+            price = price.Replace(".",",");
+            double p = Convert.ToDouble(price);
             connection.Open();
             using (SqlCommand command = new SqlCommand("CreatePurchase", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "CreatePurchase";
                 command.Parameters.AddWithValue("@material", material);
-                command.Parameters.AddWithValue("@count", count);
-                command.Parameters.AddWithValue("@price", price);
+                command.Parameters.AddWithValue("@count", c);
+                command.Parameters.AddWithValue("@price", p);
                 command.Parameters.AddWithValue("@date", date);
                 command.Parameters.AddWithValue("@employee", employee);
                 command.Parameters.Add("@rez", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -86,12 +90,14 @@ public class PurchaseController : Controller
     }
     
     [HttpPost("/UpdatePurchase")]
-    public async Task<IActionResult> UpdatePurchase([FromForm] int id, int material, double count, double price,
+    public async Task<IActionResult> UpdatePurchase([FromForm] int id, int material, string count, double price,
         DateTime date,
         int employee)
     {
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
+            count = count.Replace(".",",");
+            double c = Convert.ToDouble(count);
             connection.Open();
             using (SqlCommand command = new SqlCommand("UpdatePurchase", connection))
             {
@@ -101,7 +107,7 @@ public class PurchaseController : Controller
                     command.CommandText = "UpdatePurchase";
                     command.Parameters.AddWithValue("@id", id);
                     command.Parameters.AddWithValue("@matId", material);
-                    command.Parameters.AddWithValue("@count", count);
+                    command.Parameters.AddWithValue("@count", c);
                     command.Parameters.AddWithValue("@price", price);
                     command.Parameters.AddWithValue("@date", date);
                     command.Parameters.AddWithValue("@employeeId", employee);

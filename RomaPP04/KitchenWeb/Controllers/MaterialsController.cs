@@ -88,7 +88,7 @@ namespace KitchenWeb.Controllers
                 {
                     status = 2,
                     message = "Ошибка"
-                });
+                }); 
             }
             
         }

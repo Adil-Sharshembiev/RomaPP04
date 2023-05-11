@@ -39,8 +39,9 @@ public class SaleController : Controller
         }
     }
     [HttpPost("/CreateSale")]
-    public async Task<IActionResult> CreateProduction(int product, int count, DateTime date, int empl)
+    public async Task<IActionResult> CreateProduction([FromForm] int product, int count, DateTime date, int empl)
     {
+        
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();

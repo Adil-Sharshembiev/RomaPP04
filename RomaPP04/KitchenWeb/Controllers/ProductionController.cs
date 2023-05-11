@@ -47,17 +47,19 @@ public class ProductionController : Controller
         }
     }
     [HttpPost("/CreateProduction")]
-    public async Task<IActionResult> CreateProduction(int product, double count, DateTime date, int employee)
+    public async Task<IActionResult> CreateProduction([FromForm] int product, string count, DateTime date, int employee)
     {
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
             using (SqlCommand command = new SqlCommand("CreateProduction", connection))
             {
+                count = count.Replace(".",",");
+                double c = Convert.ToDouble(count);
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "CreateProduction";
                 command.Parameters.AddWithValue("@product", product);
-                command.Parameters.AddWithValue("@count", count);
+                command.Parameters.AddWithValue("@count", c);
                 command.Parameters.AddWithValue("@date", date);
                 command.Parameters.AddWithValue("@employee", employee);
                 command.Parameters.Add("@rez", SqlDbType.Int).Direction = ParameterDirection.Output;
