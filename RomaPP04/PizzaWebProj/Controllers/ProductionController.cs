@@ -32,7 +32,7 @@ public class ProductionController : Controller
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
-            string sqlExpression = "ReadProduction";
+            string sqlExpression = "SP_GetProduction";
             SqlCommand command = new SqlCommand(sqlExpression, connection);
             command.CommandType = System.Data.CommandType.StoredProcedure;
             var reader = command.ExecuteReader();
@@ -55,7 +55,7 @@ public class ProductionController : Controller
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
-            using (SqlCommand command = new SqlCommand("CreateProduction", connection))
+            using (SqlCommand command = new SqlCommand("SP_InsertProduction", connection))
             {
                 count = count.Replace(".", ",");
                 double c = Convert.ToDouble(count);
@@ -98,7 +98,7 @@ public class ProductionController : Controller
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
-            using (SqlCommand command = new SqlCommand("UpdateProduction", connection))
+            using (SqlCommand command = new SqlCommand("Sp_EditProduction", connection))
             {
                 count = count.Replace(".", ",");
                 double c = Convert.ToDouble(count);

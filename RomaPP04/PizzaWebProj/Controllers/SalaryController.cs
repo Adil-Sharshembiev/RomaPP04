@@ -33,7 +33,7 @@ public class SalaryController : Controller
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string sqlExpression = "ReadSalary";
+                string sqlExpression = "SP_GetSalary";
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 SqlParameter yearParam = new SqlParameter

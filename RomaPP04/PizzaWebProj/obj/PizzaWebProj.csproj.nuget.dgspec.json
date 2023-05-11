@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Desktop\\back\\RomaPP04\\RomaPP04\\PizzaWebProj\\PizzaWebProj.csproj": {}
+    "C:\\Users\\adil\\Desktop\\baiel\\RomaPP04\\RomaPP04\\PizzaWebProj\\PizzaWebProj.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\back\\RomaPP04\\RomaPP04\\PizzaWebProj\\PizzaWebProj.csproj": {
+    "C:\\Users\\adil\\Desktop\\baiel\\RomaPP04\\RomaPP04\\PizzaWebProj\\PizzaWebProj.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\back\\RomaPP04\\RomaPP04\\PizzaWebProj\\PizzaWebProj.csproj",
+        "projectUniqueName": "C:\\Users\\adil\\Desktop\\baiel\\RomaPP04\\RomaPP04\\PizzaWebProj\\PizzaWebProj.csproj",
         "projectName": "PizzaWebProj",
-        "projectPath": "C:\\Users\\User\\Desktop\\back\\RomaPP04\\RomaPP04\\PizzaWebProj\\PizzaWebProj.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\back\\RomaPP04\\RomaPP04\\PizzaWebProj\\obj\\",
+        "projectPath": "C:\\Users\\adil\\Desktop\\baiel\\RomaPP04\\RomaPP04\\PizzaWebProj\\PizzaWebProj.csproj",
+        "packagesPath": "C:\\Users\\adil\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\adil\\Desktop\\baiel\\RomaPP04\\RomaPP04\\PizzaWebProj\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\adil\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -96,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

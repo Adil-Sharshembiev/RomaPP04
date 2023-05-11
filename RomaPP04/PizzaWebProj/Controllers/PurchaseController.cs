@@ -32,7 +32,7 @@ public class PurchaseController : Controller
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
-            string sqlExpression = "ReadPurchase";
+            string sqlExpression = "SP_GetPurchase";
             SqlCommand command = new SqlCommand(sqlExpression, connection);
             command.CommandType = System.Data.CommandType.StoredProcedure;
             var reader = command.ExecuteReader();
@@ -60,7 +60,7 @@ public class PurchaseController : Controller
             price = price.Replace(".", ",");
             double p = Convert.ToDouble(price);
             connection.Open();
-            using (SqlCommand command = new SqlCommand("CreatePurchase", connection))
+            using (SqlCommand command = new SqlCommand("SP_InsertPurchase", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "CreatePurchase";
@@ -102,7 +102,7 @@ public class PurchaseController : Controller
             count = count.Replace(".", ",");
             double c = Convert.ToDouble(count);
             connection.Open();
-            using (SqlCommand command = new SqlCommand("UpdatePurchase", connection))
+            using (SqlCommand command = new SqlCommand("SP_EditPurchase", connection))
             {
                 try
                 {
