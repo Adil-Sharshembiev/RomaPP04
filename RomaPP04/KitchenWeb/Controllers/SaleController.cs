@@ -77,6 +77,48 @@ public class SaleController : Controller
             }
         }
     }
+    
+    [HttpPost("/UpdateSale")]
+    public async Task<IActionResult> UpdateSale([FromForm] int id, int product, string count,int price,int sum, DateTime date,
+        int emploee)
+    {
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            count = count.Replace(".",",");
+            double c = Convert.ToDouble(count);
+            connection.Open();
+            using (SqlCommand command = new SqlCommand("UpdateSale", connection))
+            {
+                try
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "UpdateSale";
+                    command.Parameters.AddWithValue("@id", id);
+                    command.Parameters.AddWithValue("@product", product);
+                    command.Parameters.AddWithValue("@count", c);
+                    command.Parameters.AddWithValue("@price", price);
+                    command.Parameters.AddWithValue("@sum", sum);
+                    command.Parameters.AddWithValue("@date", date);
+                    command.Parameters.AddWithValue("@emploee", emploee);
+                    command.ExecuteNonQuery();
+                    return new JsonResult(new
+                    {
+                        status = 1,
+                        message = "Изменено"
+                    });
+                }
+                catch (Exception e)
+                {
+                    return new JsonResult(new
+                    {
+                        status = 2,
+                        message = "Не удалось изменить"
+                    });
+                }
+            }
+        }
+    }
+    
     private Dictionary<string, object> SerializeRow(IEnumerable<string> cols,
         SqlDataReader reader)
     {
