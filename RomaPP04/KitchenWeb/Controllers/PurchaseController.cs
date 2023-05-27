@@ -9,11 +9,12 @@ public class PurchaseController : Controller
 {
     private readonly KitchenDbContext _context;
     private readonly string connectionString;
+    private readonly IConfiguration _configuration;
 
-    public PurchaseController(KitchenDbContext context)
+    public PurchaseController(IConfiguration configuration)
     {
-        _context = context;
-        connectionString = @"Data Source=HOME-PC;Initial Catalog=FinishKitchen;Integrated Security=True;TrustServerCertificate=True;MultiSubnetFailover=True";
+        _configuration = configuration;
+        connectionString = _configuration.GetConnectionString("DefaultConnection");
     }
     private Dictionary<string, object> SerializeRow(IEnumerable<string> cols,
         SqlDataReader reader)
@@ -74,7 +75,7 @@ public class PurchaseController : Controller
                     return new JsonResult(new
                     {
                         status = 2,
-                        message = "Не удалось добавить"
+                        message = "Недостаточно денег в бюджете"
                     });
                 }
                 else

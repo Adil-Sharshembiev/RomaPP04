@@ -17,11 +17,12 @@ namespace KitchenWeb.Controllers
     {
         private readonly KitchenDbContext _context;
         private readonly string connectionString;
+        private readonly IConfiguration _configuration;
 
-        public MaterialsController(KitchenDbContext context)
+        public MaterialsController(IConfiguration configuration)
         {
-            _context = context;
-            connectionString = @"Data Source=HOME-PC;Initial Catalog=FinishKitchen;Integrated Security=True;TrustServerCertificate=True;MultiSubnetFailover=True";
+            _configuration = configuration;
+            connectionString = _configuration.GetConnectionString("DefaultConnection");
         }
         private Dictionary<string, object> SerializeRow(IEnumerable<string> cols,
                                                 SqlDataReader reader)
@@ -132,7 +133,7 @@ namespace KitchenWeb.Controllers
                 {
 
                     count = count.Replace(".",",");
-                    price = count.Replace(".",",");
+                    price = price.Replace(".",",");
 
                     double c = Convert.ToDouble(count);
                     double p = Convert.ToDouble(price);
@@ -226,7 +227,7 @@ namespace KitchenWeb.Controllers
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     count = count.Replace(".",",");
-                    price = count.Replace(".",",");
+                    price = price.Replace(".",",");
 
                     double c = Convert.ToDouble(count);
                     double p = Convert.ToDouble(price);

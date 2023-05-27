@@ -9,11 +9,12 @@ public class SaleController : Controller
 {
     private readonly KitchenDbContext _context;
     private readonly string connectionString;
+    private readonly IConfiguration _configuration;
 
-    public SaleController(KitchenDbContext context)
+    public SaleController(IConfiguration configuration)
     {
-        _context = context;
-        connectionString = @"Data Source=HOME-PC;Initial Catalog=FinishKitchen;Integrated Security=True;TrustServerCertificate=True;MultiSubnetFailover=True";
+        _configuration = configuration;
+        connectionString = _configuration.GetConnectionString("DefaultConnection");
     }
     // GET
     [HttpGet("/ReadSaleList")]
@@ -71,7 +72,7 @@ public class SaleController : Controller
                     return new JsonResult(new
                     {
                         status = 2,
-                        message = "недостаточное количество материала",
+                        message = "недостаточное готовой продукции",
                         count = rezCount
                     });
                 }

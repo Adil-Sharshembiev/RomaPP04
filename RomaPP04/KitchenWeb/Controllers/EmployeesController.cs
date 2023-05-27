@@ -15,11 +15,12 @@ namespace KitchenWeb.Controllers
     {
         private readonly KitchenDbContext _context;
         private readonly string connectionString;
+        private readonly IConfiguration _configuration;
 
-        public EmployeesController(KitchenDbContext context)
+        public EmployeesController(IConfiguration configuration)
         {
-            _context = context;
-            connectionString = @"Data Source=HOME-PC;Initial Catalog=FinishKitchen;Integrated Security=True;TrustServerCertificate=True;MultiSubnetFailover=True";
+            _configuration = configuration;
+            connectionString = _configuration.GetConnectionString("DefaultConnection");
         }
         private Dictionary<string, object> SerializeRow(IEnumerable<string> cols,
             SqlDataReader reader)
