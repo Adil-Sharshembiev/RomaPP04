@@ -142,6 +142,9 @@ namespace KitchenWeb.Controllers
 
         }
 
+        
+
+
         [HttpPost("/GetCreditPay")]
         public async Task<IActionResult> GetCreditPay([FromForm] int credit_id)
         {
@@ -150,42 +153,41 @@ namespace KitchenWeb.Controllers
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string sqlExpression = "ReadPayByCredit_Id";
-                    SqlCommand command = new SqlCommand(sqlExpression, connection);
-                    command.CommandType = System.Data.CommandType.StoredProcedure;
-                    SqlParameter creditIdParam = new SqlParameter
+                    using (SqlCommand command = new SqlCommand("ReadPayByCredit_Id", connection))
                     {
-                        ParameterName = "@credit_id",
-                        Value = credit_id
-                    };
-                    command.Parameters.Add(creditIdParam);
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "ReadPayByCredit_Id";
+                        command.Parameters.AddWithValue("@credit_id", credit_id);
+                        command.Parameters.Add("@newdate", SqlDbType.Date).Direction = ParameterDirection.Output;
+                        command.ExecuteNonQuery();
+                        DateTime newdate = (DateTime)command.Parameters["@newdate"].Value;
+                        var reader = command.ExecuteReader();
+                        var results = new List<Dictionary<string, object>>();
+                        var cols = new List<string>();
+                        for (var i = 0; i < reader.FieldCount; i++)
+                            cols.Add(reader.GetName(i));
+                        while (reader.Read())
+                            results.Add(SerializeRow(cols, reader));
 
-                    var reader = command.ExecuteReader();
-                    var results = new List<Dictionary<string, object>>();
-                    var cols = new List<string>();
-                    for (var i = 0; i < reader.FieldCount; i++)
-                        cols.Add(reader.GetName(i));
-                    while (reader.Read())
-                        results.Add(SerializeRow(cols, reader));
-                    return new JsonResult(new
-                    {
-                        status = 1,
-                        message = "Успех",
-                        result = results
-                    });
+                        return new JsonResult(new
+                        {
+                            status = 1,
+                            date = newdate,
+                            result = results
+                        });
+                    }
                 }
             }
             catch (Exception e)
             {
                 return new JsonResult(new
                 {
-                    status = 2,
+                    status = 0,
                     message = "Ошибка"
                 });
             }
 
         }
-
 
         [HttpPost("/GetPayInfo")]
         public async Task<IActionResult> GetPayInfo([FromForm] int credit_id, DateTime date)
