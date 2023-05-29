@@ -187,6 +187,53 @@ namespace KitchenWeb.Controllers
         }
 
 
+        [HttpPost("/GetPayInfo")]
+        public async Task<IActionResult> GetPayInfo([FromForm] int credit_id, DateTime date)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand("PayInfo", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.CommandText = "PayInfo";
+                        command.Parameters.AddWithValue("@date", date);
+                        command.Parameters.AddWithValue("@credit_id", credit_id);
+                        command.Parameters.Add("@Pay", SqlDbType.Float).Direction = ParameterDirection.Output;
+                        command.Parameters.Add("@summa", SqlDbType.Float).Direction = ParameterDirection.Output;
+                        command.Parameters.Add("@fine", SqlDbType.Float).Direction = ParameterDirection.Output;
+                        command.Parameters.Add("@Percent", SqlDbType.Float).Direction = ParameterDirection.Output;
+                        command.ExecuteNonQuery();
+                        double payValue = (double)command.Parameters["@Pay"].Value;
+                        double totalValue = (double)command.Parameters["@summa"].Value;
+                        double fineValue = (double)command.Parameters["@fine"].Value;
+                        double PercentValue = (double)command.Parameters["@Percent"].Value;
+                        return new JsonResult(new
+                        {
+                            status = 1,
+                            sum = totalValue, 
+                            pay = payValue,
+                            percent = PercentValue,
+                            fine = fineValue
+                          
+                        });
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return new JsonResult(new
+                {
+                    status = 0,
+                    message = "Ошибка"
+                });
+            }
+
+        }
+
+
         [HttpPost("/PayCredit")]
         public async Task<IActionResult> PaySalary([FromForm] DateTime date, int credit_id)
         {
