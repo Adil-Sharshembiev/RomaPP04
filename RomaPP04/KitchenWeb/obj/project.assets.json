@@ -10676,19 +10676,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\adil\\.nuget\\packages\\": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\adil\\Desktop\\ppo3\\RomaPP04\\KitchenWeb\\KitchenWeb.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Desktop\\roma\\back\\RomaPP04\\RomaPP04\\KitchenWeb\\KitchenWeb.csproj",
       "projectName": "KitchenWeb",
-      "projectPath": "C:\\Users\\adil\\Desktop\\ppo3\\RomaPP04\\KitchenWeb\\KitchenWeb.csproj",
-      "packagesPath": "C:\\Users\\adil\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\adil\\Desktop\\ppo3\\RomaPP04\\KitchenWeb\\obj\\",
+      "projectPath": "C:\\Users\\User\\Desktop\\roma\\back\\RomaPP04\\RomaPP04\\KitchenWeb\\KitchenWeb.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\User\\Desktop\\roma\\back\\RomaPP04\\RomaPP04\\KitchenWeb\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\adil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10770,7 +10770,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
