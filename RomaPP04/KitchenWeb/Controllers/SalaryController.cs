@@ -33,7 +33,7 @@ public class SalaryController : Controller
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string sqlExpression = "ReadSalary";
+                    string sqlExpression = "SP_ReadSalary";
                     SqlCommand command = new SqlCommand(sqlExpression, connection);
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     SqlParameter yearParam = new SqlParameter
@@ -85,10 +85,10 @@ public class SalaryController : Controller
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand("paySalary", connection))
+                using (SqlCommand command = new SqlCommand("SP_paySalary", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.CommandText = "paySalary";
+                    command.CommandText = "SP_paySalary";
                     command.Parameters.AddWithValue("@year", year);
                     command.Parameters.AddWithValue("@month", month);
                     command.Parameters.Add("@rez", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -140,12 +140,12 @@ public class SalaryController : Controller
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                using (SqlCommand command = new SqlCommand("UpdateSalary", connection))
+                using (SqlCommand command = new SqlCommand("SP_UpdateSalary", connection))
                 {
                     total = total.Replace(".", ",");
                     double c = Convert.ToDouble(total);
                     command.CommandType = CommandType.StoredProcedure;
-                    command.CommandText = "UpdateSalary";
+                    command.CommandText = "SP_UpdateSalary";
                     command.Parameters.AddWithValue("@id", id);
                     command.Parameters.AddWithValue("@salary", c);
                     command.Parameters.Add("@rez", SqlDbType.Int).Direction = ParameterDirection.Output;

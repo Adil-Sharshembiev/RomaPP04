@@ -23,7 +23,7 @@ public class SaleController : Controller
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
-            string sqlExpression = "ReadSale";
+            string sqlExpression = "SP_ReadSale";
             SqlCommand command = new SqlCommand(sqlExpression, connection);
             command.CommandType = System.Data.CommandType.StoredProcedure;
             var reader = command.ExecuteReader();
@@ -46,10 +46,10 @@ public class SaleController : Controller
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
-            using (SqlCommand command = new SqlCommand("CreateSale", connection))
+            using (SqlCommand command = new SqlCommand("SP_CreateSale", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = "CreateSale";
+                command.CommandText = "SP_CreateSale";
                 command.Parameters.AddWithValue("@product", product);
                 command.Parameters.AddWithValue("@count", count);
                 command.Parameters.AddWithValue("@date", date);
@@ -89,12 +89,12 @@ public class SaleController : Controller
             count = count.Replace(".",",");
             double c = Convert.ToDouble(count);
             connection.Open();
-            using (SqlCommand command = new SqlCommand("UpdateSale", connection))
+            using (SqlCommand command = new SqlCommand("SP_UpdateSale", connection))
             {
                 try
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.CommandText = "UpdateSale";
+                    command.CommandText = "SP_UpdateSale";
                     command.Parameters.AddWithValue("@id", id);
                     command.Parameters.AddWithValue("@product", product);
                     command.Parameters.AddWithValue("@count", c);

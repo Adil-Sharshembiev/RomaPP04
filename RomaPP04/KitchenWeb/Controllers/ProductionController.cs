@@ -30,7 +30,7 @@ public class ProductionController : Controller
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
-            string sqlExpression = "ReadProduction";
+            string sqlExpression = "SP_ReadProduction";
             SqlCommand command = new SqlCommand(sqlExpression, connection);
             command.CommandType = System.Data.CommandType.StoredProcedure;
             var reader = command.ExecuteReader();
@@ -52,12 +52,12 @@ public class ProductionController : Controller
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
-            using (SqlCommand command = new SqlCommand("CreateProduction", connection))
+            using (SqlCommand command = new SqlCommand("SP_CreateProduction", connection))
             {
                 count = count.Replace(".",",");
                 double c = Convert.ToDouble(count);
                 command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = "CreateProduction";
+                command.CommandText = "SP_CreateProduction";
                 command.Parameters.AddWithValue("@product", product);
                 command.Parameters.AddWithValue("@count", c);
                 command.Parameters.AddWithValue("@date", date);
@@ -94,14 +94,14 @@ public class ProductionController : Controller
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
-            using (SqlCommand command = new SqlCommand("UpdateProduction", connection))
+            using (SqlCommand command = new SqlCommand("SP_UpdateProduction", connection))
             {
                 count = count.Replace(".",",");
                 double c = Convert.ToDouble(count);
                 try
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.CommandText = "UpdateProduction";
+                    command.CommandText = "SP_UpdateProduction";
                     command.Parameters.AddWithValue("@id", id);
                     command.Parameters.AddWithValue("@product", product);
                     command.Parameters.AddWithValue("@count", c);

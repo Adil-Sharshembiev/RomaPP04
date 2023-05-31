@@ -32,7 +32,7 @@ public class BudgetController : Controller
             connection.Open();
             try
             {
-                string sqlExpression = "ReadBudget";
+                string sqlExpression = "SP_ReadBudget";
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 var reader = command.ExecuteReader();
@@ -69,12 +69,12 @@ public class BudgetController : Controller
             budget = budget.Replace(".",",");
             double b = Convert.ToDouble(budget);
             connection.Open();
-            using (SqlCommand command = new SqlCommand("UpdatePurchase", connection))
+            using (SqlCommand command = new SqlCommand("SP_UpdatePurchase", connection))
             {
                 try
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.CommandText = "UpdateBudget";
+                    command.CommandText = "SP_UpdateBudget";
                     command.Parameters.AddWithValue("@budget", b);
                     command.Parameters.AddWithValue("@bonus", bonus);
                     command.ExecuteNonQuery();

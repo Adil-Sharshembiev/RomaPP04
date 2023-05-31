@@ -39,7 +39,7 @@ namespace KitchenWeb.Controllers
             using (SqlConnection connection = new SqlConnection(connectionString)) 
             {
                 connection.Open();
-                string sqlExpression = "ReadMaterials";
+                string sqlExpression = "SP_ReadMaterials";
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 var reader = command.ExecuteReader();
@@ -65,7 +65,7 @@ namespace KitchenWeb.Controllers
                 using (SqlConnection connection = new SqlConnection(connectionString)) 
                 {
                     connection.Open();
-                    string sqlExpression = "Unit";
+                    string sqlExpression = "SP_Unit";
                     SqlCommand command = new SqlCommand(sqlExpression, connection);
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     var reader = command.ExecuteReader();
@@ -102,7 +102,7 @@ namespace KitchenWeb.Controllers
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string sqlExpression = "ReadMaterialsById";
+                string sqlExpression = "SP_ReadMaterialsById";
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 SqlParameter idParam = new SqlParameter
@@ -139,7 +139,7 @@ namespace KitchenWeb.Controllers
                     double p = Convert.ToDouble(price);
 
                     connection.Open();
-                    string sqlExpression = "CreateMaterials";
+                    string sqlExpression = "SP_CreateMaterials";
                     SqlCommand command = new SqlCommand(sqlExpression, connection);
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     SqlParameter nameParam = new SqlParameter
@@ -191,7 +191,7 @@ namespace KitchenWeb.Controllers
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string sqlExpression = "DelMaterials";
+                    string sqlExpression = "SP_DelMaterials";
                     SqlCommand command = new SqlCommand(sqlExpression, connection);
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     SqlParameter idParam = new SqlParameter
@@ -233,7 +233,7 @@ namespace KitchenWeb.Controllers
                     double p = Convert.ToDouble(price);
                     
                     connection.Open();
-                    string sqlExpression = "UpdateMaterials";
+                    string sqlExpression = "SP_UpdateMaterials";
                     SqlCommand command = new SqlCommand(sqlExpression, connection);
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     SqlParameter idParam = new SqlParameter

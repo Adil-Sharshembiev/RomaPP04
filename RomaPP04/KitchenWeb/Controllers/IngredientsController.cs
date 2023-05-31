@@ -31,7 +31,7 @@ public class IngredientsController : Controller
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string sqlExpression = "ReadIngredients";
+                string sqlExpression = "SP_ReadIngredients";
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 SqlParameter idParam = new SqlParameter
@@ -81,7 +81,7 @@ public class IngredientsController : Controller
                 double c = Convert.ToDouble(count);
 
                 connection.Open();
-                string sqlExpression = "CreateIngredients";
+                string sqlExpression = "SP_CreateIngredients";
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 SqlParameter productParam = new SqlParameter
@@ -132,7 +132,7 @@ public class IngredientsController : Controller
                 double c = Convert.ToDouble(count);
                 
                 connection.Open();
-                string sqlExpression = "UpdateIngredients";
+                string sqlExpression = "SP_UpdateIngredients";
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 SqlParameter idParam = new SqlParameter
@@ -185,7 +185,7 @@ public class IngredientsController : Controller
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string sqlExpression = "DelIngredients";
+                string sqlExpression = "SP_DelIngredients";
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 SqlParameter idParam = new SqlParameter

@@ -36,7 +36,7 @@ namespace KitchenWeb.Controllers
             using (SqlConnection connection = new SqlConnection(connectionString)) 
             {
                 connection.Open();
-                string sqlExpression = "ReadEmployees";
+                string sqlExpression = "SP_ReadEmployees";
                 SqlCommand command = new SqlCommand(sqlExpression, connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 var reader = command.ExecuteReader();

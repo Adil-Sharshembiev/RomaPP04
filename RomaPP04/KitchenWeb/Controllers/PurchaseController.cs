@@ -31,7 +31,7 @@ public class PurchaseController : Controller
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
-            string sqlExpression = "ReadPurchase";
+            string sqlExpression = "SP_ReadPurchase";
             SqlCommand command = new SqlCommand(sqlExpression, connection);
             command.CommandType = System.Data.CommandType.StoredProcedure;
             var reader = command.ExecuteReader();
@@ -58,10 +58,10 @@ public class PurchaseController : Controller
             price = price.Replace(".",",");
             double p = Convert.ToDouble(price);
             connection.Open();
-            using (SqlCommand command = new SqlCommand("CreatePurchase", connection))
+            using (SqlCommand command = new SqlCommand("SP_CreatePurchase", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = "CreatePurchase";
+                command.CommandText = "SP_CreatePurchase";
                 command.Parameters.AddWithValue("@material", material);
                 command.Parameters.AddWithValue("@count", c);
                 command.Parameters.AddWithValue("@price", p);
@@ -100,12 +100,12 @@ public class PurchaseController : Controller
             count = count.Replace(".",",");
             double c = Convert.ToDouble(count);
             connection.Open();
-            using (SqlCommand command = new SqlCommand("UpdatePurchase", connection))
+            using (SqlCommand command = new SqlCommand("SP_UpdatePurchase", connection))
             {
                 try
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.CommandText = "UpdatePurchase";
+                    command.CommandText = "SP_UpdatePurchase";
                     command.Parameters.AddWithValue("@id", id);
                     command.Parameters.AddWithValue("@matId", material);
                     command.Parameters.AddWithValue("@count", c);

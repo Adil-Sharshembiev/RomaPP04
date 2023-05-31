@@ -31,7 +31,7 @@ public class ProductsController : Controller
         using (SqlConnection connection = new SqlConnection(connectionString)) 
         {
             connection.Open();
-            string sqlExpression = "ReadProducts";
+            string sqlExpression = "SP_ReadProducts";
             SqlCommand command = new SqlCommand(sqlExpression, connection);
             command.CommandType = System.Data.CommandType.StoredProcedure;
             var reader = command.ExecuteReader();
